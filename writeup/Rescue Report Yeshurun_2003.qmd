@@ -1,6 +1,6 @@
 ---
-title: "Replication of Study X by Sample & Sample (20xx, Psychological Science)"
-author: "Replication Author[s] (contact information)"
+title: "Replication of Study 1 by Yeshurun & Levy (2003). Transient spatial attention degrades temporal resolution. Psychological Science"
+author: "Irmak Ergin (irmak.ergin@stanford.edu)"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 format:
   html:
@@ -12,7 +12,14 @@ format:
 
 ## Introduction
 
-[No abstract is needed.]  Each replication project will have a straightforward, no frills report of the study and results.  These reports will be publicly available as supplementary material for the aggregate report(s) of the project as a whole.  Also, to maximize project integrity, the intro and methods will be written and critiqued in advance of data collection.  Introductions can be just 1-2 paragraphs clarifying the main idea of the original study, the target finding for replication, and any other essential information.  It will NOT have a literature review -- that is in the original publication. You can write both the introduction and the methods in past tense.  
+Justification: My research program focuses on speech comprehension, in which considering temporal factors is essential. I am planning to work with degraded/noisy speech signals, adn one way to introduce noise is by adding multiple sound sources positioned in various locations. Considering this, learning more about spatial attention, as well as temporal attention, might provide me with useful insights. I was working on attention and auditory object recognition during my master's, and paradigms in the field were heavily influenced by the literature on visual object recognition. Therefore, I hope to find inspiration through this rescue project.
+
+Required Stimuli & Procedures:"Two flashes of light were presented successively to the same location, and we determined the minimal interval between the flashes at which they were still perceived as two separate flashes, rather than as a single continuous flash. The shorter this critical interval is, the higher the temporal resolution. This measurement of temporal resolution was combined with a direct manipulation of transient spatial attention. In half the trials, the cued trials, a peripheral cue indicated the target’s onset and location. This exogenous cue, a small horizontal bar, allowed observers to focus their attention, in advance, on the target location, and was assumed to capture attention in a stimulus-driven, automatic manner. In the rest of the trials, the neutral trials, two long horizontal lines indicated the target’s onset but not its location (i.e., the target was equally likely to appear at any location)." (Yeshurun & Levy, 2003, p.226)
+
+Link to Repo: https://github.com/psych251/yeshurun2003_rescue/tree/main 
+
+Link to Original Paper: https://github.com/psych251/yeshurun2003_rescue/blob/main/original_paper/Yeshurun%20%26%20Levy(2003).pdf
+
 
 
 ## Summary of prior replication attempt
