@@ -2,10 +2,9 @@
 title: "Replication of Study 1 by Yeshurun & Levy (2003). Transient spatial attention degrades temporal resolution. Psychological Science"
 author: "Irmak Ergin (irmak.ergin@stanford.edu)"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
-format:
-  html:
-    toc: true
-    toc_depth: 3
+output: 
+  html_document:
+    keep_md: true
 ---
 
 <!-- Replication reports should all use this template to standardize reporting across projects.  These reports will be public supplementary materials that accompany the summary report(s) of the aggregate results. -->
@@ -17,51 +16,71 @@ Justification: My research program focuses on speech comprehension, in which con
 Required Stimuli & Procedures:"Two flashes of light were presented successively to the same location, and we determined the minimal interval between the flashes at which they were still perceived as two separate flashes, rather than as a single continuous flash. The shorter this critical interval is, the higher the temporal resolution. This measurement of temporal resolution was combined with a direct manipulation of transient spatial attention. In half the trials, the cued trials, a peripheral cue indicated the target’s onset and location. This exogenous cue, a small horizontal bar, allowed observers to focus their attention, in advance, on the target location, and was assumed to capture attention in a stimulus-driven, automatic manner. In the rest of the trials, the neutral trials, two long horizontal lines indicated the target’s onset but not its location (i.e., the target was equally likely to appear at any location)." (Yeshurun & Levy, 2003, p.226) 
 
 Link to Repo: https://github.com/psych251/yeshurun2003_rescue/tree/main 
-
+Link to RPubs: https://rpubs.com/irmak_ergin/1102430 
 Link to Original Paper: https://github.com/psych251/yeshurun2003_rescue/blob/main/original_paper/Yeshurun%20%26%20Levy(2003).pdf
-
 
 
 ## Summary of prior replication attempt
 
-Based on the prior write-up, describe any differences between the original and 1st replication in terms of methods, sample, sample size, and analysis. Note any potential problems such as exclusion rates, noisy data, or issues with analysis. 
+General summary of the prior replication attempt/original experient: As in the original study, each observer’s threshold of temporal resolution were  measured in two different conditions (cued and neutral). In cued trials, a periphery cue were presented before the target onset, which indicates the target’s location. While in neutral trials, neutral cue with no indication of the target’s location were presented. 
+The results from the original study was not replicated:
+* No main effect of cueing was observed in the prior replication attempt,unlike the original study. 
+* The original study reported no interaction effect between cueing and ISI. Whereas, the first replication study found a significant interaction effect between cueing and ISI: In longer ISI conditions, spatial attention enhanced performance in the temporal resolution task, while in shorter ISI, spatial attention degraded the performance.
+
+The original study had 18 participants while the 1st replication study had 10. The author of the 1st replication report notes that this was due to not being able to reach out to enough Psych1 students as they were collecting data in-person.This might be the reason behind not being able to replicate the original study. I aim to conduct the experiment online to be able to have the desired sample rate.
+
+The original study did not report any exclusion from the sample. The 1st replication report states that no participant's data was excluded from the study.
+
+The original experiment and the 1st replication study have the same analysis methods.
 
 ## Methods
-
 ### Power Analysis
-
-Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.
-
-How much power does your planned sample have for original effect? For an attenuated effect that is half the size of the original? 
-
-(If power analysis is not possible or precise, discuss more fully how you determined a sample size that would be sufficient for rescue.)
+The effect size is not reported in the original paper.The first replication study had 10 participants although it aimed to have 18 as in the original study. Therefore, I aim to get 18 participants following the number of participant reported in the original paper and see if I can replicate the findings.
 
 ### Planned Sample
 
-Planned sample size and/or termination rule, sampling frame, known demographics if any, preselection rules if any.
+There will be no pre-selection rules except for normal or corrected-to-normal vision.
+I will recruit data from 18 participants.
 
 ### Materials
 
-All materials - can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.
+Two-flash fusion threshold: Measure of temporal resolution. "Two flashes of light were presented successively to the same location, and we determined the minimal interval between the flashes at which they were still perceived as two separate flashes, rather than as a single continuous flash. The shorter this critical interval is, the higher the temporal resolution (e.g., Artieda, Pastor, Lacruz, & Obeso, 1992;Reeves, 1996)."
+
+Target: The target (37-cd/m2 disk with a diameter of 3 degrees) was composed of two flashes of light separated by a brief interval or a single continuous flash. "It appeared on a black background at one of 11 possible locations along the horizontal meridian, with eccentricity (distance from the center) ranging from 0 to 16.5 degrees. The cue in the cued trials was a 1 X 0.3 degrees green horizontal bar (43 cd/m2) appearing 0.5 degree above the target’s location. In the neutral trials, two 17 x 0.3 degree green horizontal lines appeared above and below the entire display." 
+
+(taken from the original paper & the first replication attempt report)
 
 ### Procedure	
+I am planning to follow the exact procedure of the original study, used by the 1st replication attempt as well. Quoting from the original article:
 
-Can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.
+"Each trial began with a fixation point followed by the attentional cue. The cue was present until the target’s offset, to prevent confusion between the flickering of the cue and that of the target. The target was presented 94 ms after onset of the cue: On 50% of the trials, two disks appeared, each for 47 ms, separated by a variable interval (inter stimulus interval, ISI, of 11–34 ms). On the rest of the trials, a single disk was presented for a duration ranging from 105 to 130 ms. These brief durations ensured that eye movements could not occur between cue onset and target offset (Mayfrank, Kimmig, & Fischer,1987). Each observer viewed 864 trials presented in a randomized order. Both accuracy and reaction time (RT) were recorded."
+
+![Fig.1. adapted from the original paper by the author of the 1st replication attempt, Insub Kim](procedure.png)
 
 ### Controls
-
 What attention checks, positive or negative controls, or other quality control measures are you adding so that a (positive or negative) result will be more interpretable?
 
 
 ### Analysis Plan
+The original study do not mention any participant or data exclusion.
+Participants were required to have normal or corrected to normal vision.
 
-Can also quote directly, though it is less often spelled out effectively for an analysis strategy section.  The key is to report an analysis strategy that is as close to the original - data cleaning rules, data exclusion rules, covariates, etc. - as possible.  
+"Dependent Variables:
 
-**Clarify key analysis of interest here**  You can also pre-specify additional analyses you plan to do.
+  - Accuracy(d') was calculated following equation: d' = z(hit) - z(false alarm), (Macmillan & Creelman, 1991). 
+  - Criterion(c, measure of response bias) was calculated using: c = -0.5(z(hit) + z(false alarm)), (Macmillan & Creelman, 1991). 
+  - Reaction Time (RT)"*
+
+**Clarify key analysis of interest here**  
+  
+  "- Differences between cued and neutral trials
+   - The effect of inter-stimulus interval (ISI)"*
+  
+*Quoted sections are taken from the 1st replication report.
 
 ### Differences from Original Study and 1st replication
 
-Explicitly describe known differences in sample, setting, procedure, and analysis plan from original study.  The goal, of course, is to minimize those differences, but differences will inevitably occur.  Also, note whether such differences are anticipated to make a difference based on claims in the original article or subsequent published research on the conditions for obtaining the effect.
+The only difference I can see is that the first replication study had 10 participants although it aimed to have 18 as in the original study. This was dues to collecting data in-person and not being able to find enough participants in time. 
 
 ### Methods Addendum (Post Data Collection)
 
@@ -79,6 +98,12 @@ You can comment this section out prior to final report with data collection.
 
 ### Data preparation
 
+Data preparation plan: 
+- Load the data
+- Cued and neural trials will be determined. (changing varible names to more "intuitive" ones)
+- Compute accuracy (d prime) value based on the equation satated in the analysis plan section.
+- Calculate the mean d primes per subgroups for analysis and plotting. E.g. for cuing conditions (cued vs neural), eccentricity x cue, ISI x cue, eccentricity x ISI. 
+
 Data preparation following the analysis plan.
 	
 ```{r include=F}
@@ -95,11 +120,11 @@ Data preparation following the analysis plan.
 
 ### Results of control measures
 
-How did people perform on any quality control checks or positive and negative controls? 
+There are no control measures planned for this study.
 
 ### Confirmatory analysis
 
-The analyses as specified in the analysis plan.  
+Following the original paper, and as it was done in the 1st replication attempt, a within-subject three-way analysis of variance (ANOVA; Cuing x Eccentricity x ISI) will be performed on the accuracy (d') and RT data collected on trials with correct responses. 
 
 *Three-panel graph with original, 1st replication, and your replication is ideal here*
 
@@ -119,3 +144,5 @@ Open the discussion section with a paragraph summarizing the primary result from
 ### Commentary
 
 Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.
+
+
