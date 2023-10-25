@@ -185,7 +185,21 @@ There are no control measures planned for this study.
 
 ### Confirmatory analysis
 
-Following the original paper, and as it was done in the 1st replication attempt, a within-subject three-way analysis of variance (ANOVA; Cuing x Eccentricity x ISI) will be performed on the accuracy (d') and RT data collected on trials with correct responses. 
+Following the original paper, and as it was done in the 1st replication attempt, a within-subject three-way analysis of variance (ANOVA; Cuing x Eccentricity x ISI) will be performed on the accuracy (d') and RT data collected on trials with correct responses.
+
+The key statistic of 3 way ANOVA anova was performed. The code below is taken by the first replicatio report.
+```{r}
+
+# The key statistic: within-subject 3-way Anova
+Result <- aov(dPrime ~ (cue*targetLoc*ISI) + Error(sub/cue*targetLoc*ISI), data=dp)
+
+# main effect: Cuing
+summary(Result[5])
+
+# interaction effect: Cuing X ISI
+summary(Result[10])
+
+```
 
 *Three-panel graph with original, 1st replication, and your replication is ideal here*
 
