@@ -56,6 +56,7 @@ I am planning to follow the exact procedure of the original study, used by the 1
 "Each trial began with a fixation point followed by the attentional cue. The cue was present until the target’s offset, to prevent confusion between the flickering of the cue and that of the target. The target was presented 94 ms after onset of the cue: On 50% of the trials, two disks appeared, each for 47 ms, separated by a variable interval (inter stimulus interval, ISI, of 11–34 ms). On the rest of the trials, a single disk was presented for a duration ranging from 105 to 130 ms. These brief durations ensured that eye movements could not occur between cue onset and target offset (Mayfrank, Kimmig, & Fischer,1987). Each observer viewed 864 trials presented in a randomized order. Both accuracy and reaction time (RT) were recorded."
 
 ![Fig.1. adapted from the original paper by the author of the 1st replication attempt, Insub Kim](procedure.png)
+Link to experiment code: https://github.com/psych251/yeshurun2003_rescue/blob/main/data/spaital_temporal.m 
 
 ### Controls
 What attention checks, positive or negative controls, or other quality control measures are you adding so that a (positive or negative) result will be more interpretable?
@@ -64,6 +65,7 @@ What attention checks, positive or negative controls, or other quality control m
 ### Analysis Plan
 The original study do not mention any participant or data exclusion.
 Participants were required to have normal or corrected to normal vision.
+
 
 "Dependent Variables:
 
@@ -98,24 +100,83 @@ You can comment this section out prior to final report with data collection.
 
 ### Data preparation
 
+Link to plot A data: https://github.com/psych251/yeshurun2003_rescue/tree/main/data/_DATA/behavior/pilot_A 
+
+Link to data organization code (to be able to take transfer the data from MATLAB to R): https://github.com/psych251/yeshurun2003_rescue/blob/main/data/Mat2R.m 
+
 Data preparation plan: 
 - Load the data
 - Cued and neural trials will be determined. (changing varible names to more "intuitive" ones)
 - Compute accuracy (d prime) value based on the equation satated in the analysis plan section.
 - Calculate the mean d primes per subgroups for analysis and plotting. E.g. for cuing conditions (cued vs neural), eccentricity x cue, ISI x cue, eccentricity x ISI. 
 
-Data preparation following the analysis plan.
+The data preparationcode below has taken from the first replication report with minor changes.
 	
 ```{r include=F}
-### Data Preparation
+####Load Relevant Libraries and Functions
 
-#### Load Relevant Libraries and Functions
+library(tidyverse)
+library(ggplot2)
+library(ggthemes)
+library(psycho)
+library(ggpubr)
+library(gridExtra)
+library(cowplot)
 
-#### Import data
+####Import data
 
-#### Data exclusion / filtering
+d <- read_csv("Pilot_A.csv")
 
-#### Prepare data for analysis - create columns etc.
+#### Prepare data for analysis - create columns and change variable names
+d$cue <- ifelse(d$cue == 1, 'cued', 'neutral')
+
+#d[d$cue == 1, "cue"] <- 'cued'
+#d[d$cue == 0, "cue"] <- 'neutral'
+
+x=1:length(unique(d$sub))
+new_subNames=sprintf("s0%02d",x)
+subNames = unique(d$sub)
+for(i in 1:length(subNames)) {
+  d$sub[d$sub == subNames[i]] = new_subNames[i]
+}
+
+
+kk = sort(unique(d$targetLoc))
+mask1=d$targetLoc ==kk[1]
+mask2=d$targetLoc ==kk[2]
+mask3=d$targetLoc ==kk[3]
+mask4=d$targetLoc ==kk[4]
+mask5=d$targetLoc ==kk[5]
+mask6=d$targetLoc ==kk[6]
+
+d$targetLoc[mask1] = 0
+d$targetLoc[mask2] = 3
+d$targetLoc[mask3] = 6
+d$targetLoc[mask4] = 9
+d$targetLoc[mask5] = 13
+d$targetLoc[mask6] = 16
+
+
+d <- d %>% mutate( 
+  cue = factor(cue),targetLoc = factor(targetLoc), ISI = factor(ISI)
+)
+
+#### Compute dPrime
+
+dp <- d %>% group_by(sub,cue,targetLoc,ISI) %>% summarize(nHit = sum(SDT == 'HI' ), nFA = sum(SDT == 'FA' ), nMiss = sum(SDT == 'MI' ), nCR = sum(SDT == 'CR' ), dPrime= dprime(nHit, nFA, nMiss, nCR)$dprime, criterion=dprime(nHit, nFA, nMiss, nCR)$c) 
+
+#### Make sub-selection of the data for plotting 
+
+dplot_cue <- dp %>% group_by(sub,cue) %>% summarize(dPrime = mean(dPrime))
+dplot_ecc <- dp %>% group_by(cue,targetLoc) %>% summarize(dPrime = mean(dPrime))
+dplot_ecc2 <- dp %>% group_by(targetLoc,ISI) %>% summarize(dPrime = mean(dPrime))
+dplot_ISI <- dp %>% group_by(cue,ISI) %>% summarize(dPrime = mean(dPrime))
+dplot_stat_ISI <- dp %>% group_by(sub,cue,ISI) %>% summarize(dPrime = mean(dPrime))
+
+
+dplot_ecc_sd <- dp %>% group_by(sub,targetLoc,ISI) %>% summarize(dPrime = mean(dPrime))
+
+dplot_ecc_sd
 ```
 
 ### Results of control measures
