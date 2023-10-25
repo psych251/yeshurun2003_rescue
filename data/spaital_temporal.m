@@ -15,6 +15,7 @@ subName = input('Subject Initials:  ', 's');
 genDir = '/Users/irmakergin/Desktop/yeshurun2003_rescue/data';
 functions = '/Users/irmakergin/Desktop/yeshurun2003_rescue/data/_FUNC';
 cd(functions)
+
 %addpath(genpath(fullfile(genDir,'_FUNC')));
 dataDir = fullfile(genDir,'_DATA','behavior',subName);
 if ~exist(dataDir) &&  ~strcmp(subName,'tes'), mkdir(dataDir); end
@@ -25,15 +26,14 @@ dataName = fullfile(dataDir,sprintf('exp1_%s_%d',subName,length(datas)+1));
 bdgcol = 128;
 Screen('Preference', 'SkipSyncTests', 1);
 ScreenNum = max(Screen('Screens'));
-%[wptr,rect]=Screen('OpenWindow',ScreenNum,[0 0 0]);
+[wptr,rect]=Screen('OpenWindow',ScreenNum,[0 0 0]);
+Screen('BlendFunction', wptr, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-% changeSpecify the desired window size (e.g., 800x600)
-windowWidth = 800;
-windowHeight = 600;
+% Screen('HideCursorHelper', wptr);
+[cx, cy] = RectCenter(rect);
+ifi = 1/85;
 
-[wptr, rect] = Screen('OpenWindow', ScreenNum, [0 0 0], [0 0 windowWidth windowHeight]);
-
-Screen('BlendFunction', wptr, GL_SRC_ALPHA, GL_ONaE_MINUS_SRC_ALPHA);
+Screen('TextSize',wptr, 40);
 
 % Screen('HideCursorHelper', wptr);
 [cx, cy] = RectCenter(rect);
@@ -60,8 +60,8 @@ emat=[cueing,tarType,tarLoc,ISI];
 if ~strcmp(subName,'tes'),save(dataName,'emat');end
 
 %% experiment loop
-Screen('DrawText',wptr,'start',cx/2,cy/2,[255 255 255]);
-Screen('Flip',wptr);
+Screen('DrawText',wptr,'start',cx/1.1,cy,[255 255 255]);
+Screen('Flip',wptr); 
 
 scanPulse = 0;
 while scanPulse ~= 1
@@ -77,7 +77,7 @@ while scanPulse ~= 1
 end
 
 
-TargetSize=deg2pixel(3);
+TargetSize=deg2pixel(1);
 
 % penWidth=round(deg2pixel(0.3));
 penWidth=6;
@@ -150,8 +150,8 @@ for tr=1:length(emat)
 %     tLength2=100;
     if emat(tr,2) ==1
         for iter = 1:tLength1
-            Screen('DrawDots', wptr, TargetLocGrid, TargetSize, [255 255 255], [], 2);
-            %         Screen('DrawDots', wptr, [dotXpos dotYpos], dotSizePix, dotColor, [], 2);
+          Screen('DrawDots', wptr, TargetLocGrid, TargetSize, [255 255 255], [], 2);           
+%         Screen('DrawDots', wptr, [dotXpos dotYpos], dotSizePix, dotColor, [], 2);
             Screen('Flip',wptr);
         end
         
