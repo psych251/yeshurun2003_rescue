@@ -16,22 +16,28 @@ Justification: My research program focuses on speech comprehension, in which con
 Required Stimuli & Procedures:"Two flashes of light were presented successively to the same location, and we determined the minimal interval between the flashes at which they were still perceived as two separate flashes, rather than as a single continuous flash. The shorter this critical interval is, the higher the temporal resolution. This measurement of temporal resolution was combined with a direct manipulation of transient spatial attention. In half the trials, the cued trials, a peripheral cue indicated the target’s onset and location. This exogenous cue, a small horizontal bar, allowed observers to focus their attention, in advance, on the target location, and was assumed to capture attention in a stimulus-driven, automatic manner. In the rest of the trials, the neutral trials, two long horizontal lines indicated the target’s onset but not its location (i.e., the target was equally likely to appear at any location)." (Yeshurun & Levy, 2003, p.226) 
 
 Link to Repo: https://github.com/psych251/yeshurun2003_rescue/tree/main 
-Link to RPubs: https://rpubs.com/irmak_ergin/1102430 
+Link to RPubs: https://rpubs.com/irmak_ergin/1112970
 Link to Original Paper: https://github.com/psych251/yeshurun2003_rescue/blob/main/original_paper/Yeshurun%20%26%20Levy(2003).pdf
 
 
 ## Summary of prior replication attempt
 
-General summary of the prior replication attempt/original experient: As in the original study, each observer’s threshold of temporal resolution were  measured in two different conditions (cued and neutral). In cued trials, a periphery cue were presented before the target onset, which indicates the target’s location. While in neutral trials, neutral cue with no indication of the target’s location were presented. 
+#PSYCH251 1st  Replication Project
+General summary of the prior replication attempt/original experiment: As in the original study, each observer’s threshold of temporal resolution were  measured in two different conditions (cued and neutral). In cued trials, a periphery cue were presented before the target onset, which indicates the target’s location. While in neutral trials, neutral cue with no indication of the target’s location were presented. 
+
 The results from the original study was not replicated:
 * No main effect of cueing was observed in the prior replication attempt,unlike the original study. 
 * The original study reported no interaction effect between cueing and ISI. Whereas, the first replication study found a significant interaction effect between cueing and ISI: In longer ISI conditions, spatial attention enhanced performance in the temporal resolution task, while in shorter ISI, spatial attention degraded the performance.
 
-The original study had 18 participants while the 1st replication study had 10. The author of the 1st replication report notes that this was due to not being able to reach out to enough Psych1 students as they were collecting data in-person.This might be the reason behind not being able to replicate the original study. I aim to conduct the experiment online to be able to have the desired sample rate.
+The original study had 18 participants while the 1st replication study had 10. The author of the 1st replication notes that this was due to not being able to reach out to enough Psych1 students as they were collecting data in-person.This might be the reason behind not being able to replicate the original study. 
 
 The original study did not report any exclusion from the sample. The 1st replication report states that no participant's data was excluded from the study.
 
-The original experiment and the 1st replication study have the same analysis methods.
+The original experiment and the 1st replication study have the same analysis methods but the replication study did not analyze the Reaction Time (RT) data. The original experiment did not find significant effects on RT. 
+
+#Forward Literature Search for Other Replication Attempts
+A forward literature search was conducted to find possible replication studies of the original paper, other than the 1st replication project done by Insub Kim for the PSYCH251 class. 
+Chica & Christine (2009) Experiment 1: Using 12 participants, they replicated the finding that temporal resolution is impaired on spatially cued trials as compared with neutral trials, even when controlled for Reaction Time. 
 
 ## Methods
 ### Power Analysis
@@ -40,7 +46,7 @@ The effect size is not reported in the original paper.The first replication stud
 ### Planned Sample
 
 There will be no pre-selection rules except for normal or corrected-to-normal vision.
-I will recruit data from 18 participants.
+I will recruit data from 18 PSYCH1 participants via a 2023 MacBook Pro. Participants will receive a course credit for participation.
 
 ### Materials
 
@@ -66,7 +72,6 @@ What attention checks, positive or negative controls, or other quality control m
 The original study do not mention any participant or data exclusion.
 Participants were required to have normal or corrected to normal vision.
 
-
 "Dependent Variables:
 
   - Accuracy(d') was calculated following equation: d' = z(hit) - z(false alarm), (Macmillan & Creelman, 1991). 
@@ -77,12 +82,17 @@ Participants were required to have normal or corrected to normal vision.
   
   "- Differences between cued and neutral trials
    - The effect of inter-stimulus interval (ISI)"*
+
+Key analysis: A within-subject three-way analysis of variance (ANOVA; Cuing x Eccentricity x ISI) will be performed on the accuracy (d') and RT data collected on trials with correct responses. 
+The original study does not state a directional hypothesis in the Introduction section, but in Experiment 1 it is written that " ...we reasoned that attending to the location of this temporal target might decrease temporal resolution. Alternatively, the effects of attention on temporal resolution might not be constrained by its effects on spatial resolution." (p.226)
   
 *Quoted sections are taken from the 1st replication report.
 
 ### Differences from Original Study and 1st replication
 
-The only difference I can see is that the first replication study had 10 participants although it aimed to have 18 as in the original study. This was dues to collecting data in-person and not being able to find enough participants in time. 
+Data collection and Participants: The only difference I can see is that the first replication study had 10 participants although it aimed to have 18 as in the original study. This was dues to collecting data in-person and not being able to find enough participants in time. I will be collecting data from PPSYCH1 students.
+
+The 1st replication attempt collected but not analyzed RT data, unlike the original experiment. I will be analyzing the effects of cueing, ISI, and eccentricity on RT as well as on accuracy (d prime). 
 
 ### Methods Addendum (Post Data Collection)
 
@@ -106,13 +116,14 @@ Link to data organization code (to be able to take transfer the data from MATLAB
 
 Data preparation plan: 
 - Load the data
-- Cued and neural trials will be determined. (changing varible names to more "intuitive" ones)
-- Compute accuracy (d prime) value based on the equation satated in the analysis plan section.
+- Cued and neural trials will be determined. (changing variable names to more "intuitive" ones)
+- Compute accuracy (d prime) value based on the equation stated in the analysis plan section.
 - Calculate the mean d primes per subgroups for analysis and plotting. E.g. for cuing conditions (cued vs neural), eccentricity x cue, ISI x cue, eccentricity x ISI. 
+- Calculate the mean RTs per subgroups for analysis and plotting. E.g. for cuing conditions (cued vs neural), eccentricity x cue, ISI x cue, eccentricity x ISI. 
 
-The data preparationcode below has taken from the first replication report with minor changes.
+The data preparation code below has taken from the first replication report with changes.
 	
-```{r include=F}
+```{r}
 ####Load Relevant Libraries and Functions
 
 library(tidyverse)
@@ -125,13 +136,14 @@ library(cowplot)
 
 ####Import data
 
-d <- read_csv("Pilot_A.csv")
+d <- read_csv("sptioTemporal.csv")
 
 #### Prepare data for analysis - create columns and change variable names
+#Create a new column 'cue' in the dataset d. If the value in the 'cue' column is 1, it assigns 'cued', otherwise 'neutral' to the new 'cue' column.
+
 d$cue <- ifelse(d$cue == 1, 'cued', 'neutral')
 
-#d[d$cue == 1, "cue"] <- 'cued'
-#d[d$cue == 0, "cue"] <- 'neutral'
+#Generate new subject names with the format "s0XX" (where XX is a two-digit number) for each unique subject in the 'sub' column and assign these new names to the 'sub' column in the dataset.
 
 x=1:length(unique(d$sub))
 new_subNames=sprintf("s0%02d",x)
@@ -139,7 +151,13 @@ subNames = unique(d$sub)
 for(i in 1:length(subNames)) {
   d$sub[d$sub == subNames[i]] = new_subNames[i]
 }
+end
+head(d)
+```
 
+
+```{r}
+#TargetLoc is the column with eccentricity information that are arbitraryly labeled from 1 to 6 in the stimulus creation code. The code below assigns back eccentricity values to 'targetLoc' labels. 
 
 kk = sort(unique(d$targetLoc))
 mask1=d$targetLoc ==kk[1]
@@ -156,16 +174,19 @@ d$targetLoc[mask4] = 9
 d$targetLoc[mask5] = 13
 d$targetLoc[mask6] = 16
 
-
+#Convert  'cue,' 'targetLoc,' and 'ISI' columns in the dataset to factors
 d <- d %>% mutate( 
   cue = factor(cue),targetLoc = factor(targetLoc), ISI = factor(ISI)
 )
+```
 
+
+```{r}
 #### Compute dPrime
 
 dp <- d %>% group_by(sub,cue,targetLoc,ISI) %>% summarize(nHit = sum(SDT == 'HI' ), nFA = sum(SDT == 'FA' ), nMiss = sum(SDT == 'MI' ), nCR = sum(SDT == 'CR' ), dPrime= dprime(nHit, nFA, nMiss, nCR)$dprime, criterion=dprime(nHit, nFA, nMiss, nCR)$c) 
 
-#### Make sub-selection of the data for plotting 
+#### Make sub-selection of the data for plotting later on -accuracy
 
 dplot_cue <- dp %>% group_by(sub,cue) %>% summarize(dPrime = mean(dPrime))
 dplot_ecc <- dp %>% group_by(cue,targetLoc) %>% summarize(dPrime = mean(dPrime))
@@ -178,6 +199,17 @@ dplot_ecc_sd <- dp %>% group_by(sub,targetLoc,ISI) %>% summarize(dPrime = mean(d
 
 dplot_ecc_sd
 ```
+```{r}
+#Make sub-selection of the data- RT
+
+dplot_cue_rt <- d %>% group_by(sub, cue) %>% summarize(mean_RT = mean(RT))
+dplot_ecc_rt <- d %>% group_by(cue, targetLoc) %>% summarize(mean_RT = mean(RT))
+dplot_ecc2_rt <- d %>% group_by(targetLoc, ISI) %>% summarize(mean_RT = mean(RT))
+dplot_ISI_rt <- d %>% group_by(cue, ISI) %>% summarize(mean_RT = mean(RT))
+dplot_stat_ISI_rt <- d %>% group_by(sub, cue, ISI) %>% summarize(mean_RT = mean(RT))
+dplot_ecc_sd_rt <- d %>% group_by(sub, targetLoc, ISI) %>% summarize(mean_RT = mean(RT))
+```
+
 
 ### Results of control measures
 
@@ -187,19 +219,87 @@ There are no control measures planned for this study.
 
 Following the original paper, and as it was done in the 1st replication attempt, a within-subject three-way analysis of variance (ANOVA; Cuing x Eccentricity x ISI) will be performed on the accuracy (d') and RT data collected on trials with correct responses.
 
-The key statistic of 3 way ANOVA anova was performed. The code below is taken by the first replicatio report.
+The key statistic of 3 way ANOVA anova was performed. The code below is taken by the first replication report.
 ```{r}
+###Accuracy
 
-# The key statistic: within-subject 3-way Anova
-Result <- aov(dPrime ~ (cue*targetLoc*ISI) + Error(sub/cue*targetLoc*ISI), data=dp)
+# within-subject 3-way Anova on Accuracy (dPrime), testing the interaction of cue,eccentricity,and ISI
+Result_accuracy <- aov(dPrime ~ (cue*targetLoc*ISI) + Error(sub/cue*targetLoc*ISI), data=dp)
+
+summary(Result_accuracy)
 
 # main effect: Cuing
-summary(Result[5])
+summary(Result_accuracy[5])
 
 # interaction effect: Cuing X ISI
-summary(Result[10])
+summary(Result_accuracy[10])
 
 ```
+
+```{r}
+### RT
+
+# Within-subject 3-way ANOVA - Reaction Time
+Result_rt <- aov(RT ~ (cue * targetLoc * ISI) + Error(sub / cue * targetLoc * ISI), data = d)
+
+# Summary of RT ANOVA
+summary(Result_rt)
+
+# Main effect: Cuing
+summary(Result_rt[5])
+
+# Interaction effect: Cuing X ISI
+summary(Result_rt[10])
+```
+
+
+```{r}
+### Plotting
+
+# Cueing effect
+p1 <- ggplot(dplot_cue, aes(x=cue, y=dPrime))+
+  geom_boxplot() +
+  #geom_jitter((aes(colour = sub)), size=3, alpha=0.9) +
+  scale_y_continuous(breaks = seq(0,3.75,0.5),limits = c(0,3.75))+
+  ggtitle("Cueing Condition") +
+  theme_classic()
+
+#or a bar plot?
+#p1 <- ggplot(dplot_cue, aes(x=cue, y=dPrime))+
+ # geom_bar(stat = "identity") +
+ # scale_y_continuous(breaks = seq(0,3.75,0.5),limits = c(0,3.75))+
+ # ggtitle("Cueing Condition") +
+ # theme_classic()
+
+
+# Cueing X Ecc
+p2 <- ggplot(dplot_ecc, aes(x=targetLoc, y=`dPrime`, group=cue)) +
+  geom_line(aes(linetype=cue))+
+  geom_point(aes(shape=cue))+
+  scale_y_continuous(breaks = seq(0,4,0.5),limits = c(0,4))+
+  scale_x_discrete(name="Eccentricity (deg)")+
+  ggtitle("Eccentricity") +
+  theme_classic()
+
+# Cueing X ISI
+p3 <- ggplot(dplot_ISI, aes(x=ISI, y=dPrime, group=cue)) +
+  geom_line(aes(linetype=cue))+
+  geom_point(aes(shape=cue))+
+  scale_y_continuous(breaks = seq(0,4,0.5),limits = c(0,4))+
+  scale_x_discrete(name="ISI (ms)")+
+  theme_classic()
+
+# ECC X ISI
+p4 <- ggplot(dplot_ecc2, aes(x=targetLoc, y=`dPrime`, group=ISI)) +
+  geom_line(aes(linetype=ISI))+
+  geom_point(aes(shape=ISI))+
+  scale_y_continuous(breaks = seq(0,4,0.5),limits = c(0,4))+
+  scale_x_discrete(name="Eccentricity (deg)")+
+  theme_classic()
+
+plot_grid(p1, p2, p3, p4,ncol = 2, nrow = 2)
+```
+
 
 *Three-panel graph with original, 1st replication, and your replication is ideal here*
 
