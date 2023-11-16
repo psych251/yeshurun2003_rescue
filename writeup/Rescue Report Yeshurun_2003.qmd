@@ -40,6 +40,7 @@ A forward literature search was conducted to find possible replication studies o
 Chica & Christine (2009) Experiment 1: Using 12 participants, they replicated the finding that temporal resolution is impaired on spatially cued trials as compared with neutral trials, even when controlled for Reaction Time. 
 
 ## Methods
+
 ### Power Analysis
 The effect size is not reported in the original paper.The first replication study had 10 participants although it aimed to have 18 as in the original study. Therefore, I aim to get 18 participants following the number of participant reported in the original paper and see if I can replicate the findings.
 
@@ -310,6 +311,7 @@ Any follow-up analyses desired (not required).
 ## Discussion
 
 ## Mini meta analysis
+
 Combining across the original paper, 1st replication, and 2nd replication, what is the aggregate effect size? 
 
 ### Summary of Replication Attempt
@@ -318,6 +320,6 @@ Open the discussion section with a paragraph summarizing the primary result from
 
 ### Commentary
 
-Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.
+Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long. 
 
 
