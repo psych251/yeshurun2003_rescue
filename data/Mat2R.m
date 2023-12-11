@@ -2,7 +2,7 @@ clear
 
 genDir=pwd;
 addpath(genpath(fullfile(genDir,'_FUNC')));
-dataDir = fullfile(genDir,'_DATA','behavior');
+dataDir = fullfile(genDir,'_DATA','behavior','pilot_B');
 alldata = getAllFiles(dataDir,'*.mat',1);
 
 subID = strsplit(fileparts(alldata{1}),'/');

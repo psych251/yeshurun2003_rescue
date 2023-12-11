@@ -11,20 +11,18 @@ output:
 
 ## Introduction
 
-Justification: My research program focuses on speech comprehension, in which considering temporal factors is essential. I am planning to work with degraded/noisy speech signals, adn one way to introduce noise is by adding multiple sound sources positioned in various locations. Considering this, learning more about spatial attention, as well as temporal attention, might provide me with useful insights. I was working on attention and auditory object recognition during my master's, and paradigms in the field were heavily influenced by the literature on visual object recognition. Therefore, I hope to find inspiration through this rescue project.
+Justification: My research program focuses on speech comprehension, in which considering temporal factors is essential. I am planning to work with degraded/noisy speech signals, and one way to introduce noise is by adding multiple sound sources positioned in various locations. Considering this, learning more about spatial attention, as well as temporal attention, might provide me with useful insights. I was working on attention and auditory object recognition during my master's, and paradigms in the field were heavily influenced by the literature on visual object recognition. Therefore, I hope to find inspiration through this rescue project.
 
 Required Stimuli & Procedures:"Two flashes of light were presented successively to the same location, and we determined the minimal interval between the flashes at which they were still perceived as two separate flashes, rather than as a single continuous flash. The shorter this critical interval is, the higher the temporal resolution. This measurement of temporal resolution was combined with a direct manipulation of transient spatial attention. In half the trials, the cued trials, a peripheral cue indicated the target’s onset and location. This exogenous cue, a small horizontal bar, allowed observers to focus their attention, in advance, on the target location, and was assumed to capture attention in a stimulus-driven, automatic manner. In the rest of the trials, the neutral trials, two long horizontal lines indicated the target’s onset but not its location (i.e., the target was equally likely to appear at any location)." (Yeshurun & Levy, 2003, p.226) 
 
 Link to Repo: https://github.com/psych251/yeshurun2003_rescue/tree/main 
-Link to RPubs: https://rpubs.com/irmak_ergin/1112970
+Link to RPubs: https://rpubs.com/irmak_ergin
 Link to Original Paper: https://github.com/psych251/yeshurun2003_rescue/blob/main/original_paper/Yeshurun%20%26%20Levy(2003).pdf
-
 
 ## Summary of prior replication attempt
 
 #PSYCH251 1st  Replication Project
-General summary of the prior replication attempt/original experiment: As in the original study, each observer’s threshold of temporal resolution were  measured in two different conditions (cued and neutral). In cued trials, a periphery cue were presented before the target onset, which indicates the target’s location. While in neutral trials, neutral cue with no indication of the target’s location were presented. 
-
+General summary of the prior replication attempt/original experiment: As in the original study, each observer's threshold of temporal resolution were  measured in two different conditions (cued and neutral). In cued trials, a periphery cue were presented before the target onset, which indicates the target’s location. While in neutral trials, neutral cue with no indication of the target’s location were presented. 
 The results from the original study was not replicated:
 * No main effect of cueing was observed in the prior replication attempt,unlike the original study. 
 * The original study reported no interaction effect between cueing and ISI. Whereas, the first replication study found a significant interaction effect between cueing and ISI: In longer ISI conditions, spatial attention enhanced performance in the temporal resolution task, while in shorter ISI, spatial attention degraded the performance.
@@ -63,11 +61,11 @@ I am planning to follow the exact procedure of the original study, used by the 1
 "Each trial began with a fixation point followed by the attentional cue. The cue was present until the target’s offset, to prevent confusion between the flickering of the cue and that of the target. The target was presented 94 ms after onset of the cue: On 50% of the trials, two disks appeared, each for 47 ms, separated by a variable interval (inter stimulus interval, ISI, of 11–34 ms). On the rest of the trials, a single disk was presented for a duration ranging from 105 to 130 ms. These brief durations ensured that eye movements could not occur between cue onset and target offset (Mayfrank, Kimmig, & Fischer,1987). Each observer viewed 864 trials presented in a randomized order. Both accuracy and reaction time (RT) were recorded."
 
 ![Fig.1. adapted from the original paper by the author of the 1st replication attempt, Insub Kim](procedure.png)
+
 Link to experiment code: https://github.com/psych251/yeshurun2003_rescue/blob/main/data/spaital_temporal.m 
 
 ### Controls
-What attention checks, positive or negative controls, or other quality control measures are you adding so that a (positive or negative) result will be more interpretable?
-
+No controls or attention checks were added to the design.
 
 ### Analysis Plan
 The original study do not mention any participant or data exclusion.
@@ -79,7 +77,7 @@ Participants were required to have normal or corrected to normal vision.
   - Criterion(c, measure of response bias) was calculated using: c = -0.5(z(hit) + z(false alarm)), (Macmillan & Creelman, 1991). 
   - Reaction Time (RT)"*
 
-**Clarify key analysis of interest here**  
+Analysis of Interest:
   
   "- Differences between cued and neutral trials
    - The effect of inter-stimulus interval (ISI)"*
@@ -91,27 +89,21 @@ The original study does not state a directional hypothesis in the Introduction s
 
 ### Differences from Original Study and 1st replication
 
-Data collection and Participants: The only difference I can see is that the first replication study had 10 participants although it aimed to have 18 as in the original study. This was dues to collecting data in-person and not being able to find enough participants in time. I will be collecting data from PPSYCH1 students.
+The only difference I can see is that the first replication study had 10 participants although it aimed to have 18 as in the original study. This was dues to collecting data in-person and not being able to find enough participants in time. I will be collecting data from PPSYCH1 students.
 
 The 1st replication attempt collected but not analyzed RT data, unlike the original experiment. I will be analyzing the effects of cueing, ISI, and eccentricity on RT as well as on accuracy (d prime). 
 
 ### Methods Addendum (Post Data Collection)
 
-You can comment this section out prior to final report with data collection.
-
 #### Actual Sample
-  Sample size, demographics, data exclusions based on rules spelled out in analysis plan
+5 participants among PSYCH251 students. 
 
 #### Differences from pre-data collection methods plan
-  Any differences from what was described as the original plan, or “none”.
-
+I was not able to find 18 naive participants as I planned to, and rather recruited data from 5 non-naive PSYCH251 students. I am planning to recruit data from 18 PSYCH1 students on 2024 Winter Quarter. 
 
 ## Results
 
-
 ### Data preparation
-
-Link to plot A data: https://github.com/psych251/yeshurun2003_rescue/tree/main/data/_DATA/behavior/pilot_A 
 
 Link to data organization code (to be able to take transfer the data from MATLAB to R): https://github.com/psych251/yeshurun2003_rescue/blob/main/data/Mat2R.m 
 
@@ -137,7 +129,7 @@ library(cowplot)
 
 ####Import data
 
-d <- read_csv("sptioTemporal.csv")
+d <- read_csv("Pilot_B.csv")
 
 #### Prepare data for analysis - create columns and change variable names
 #Create a new column 'cue' in the dataset d. If the value in the 'cue' column is 1, it assigns 'cued', otherwise 'neutral' to the new 'cue' column.
@@ -252,7 +244,24 @@ summary(Result_rt[5])
 # Interaction effect: Cuing X ISI
 summary(Result_rt[10])
 ```
+The original paper found:
+  For accuracy:
+- Significant main effect of cuing: F(1,17)=8.01 p<.01
+- No significant interactions: Cuing X ISI, Cuing X Eccentricity, and ISI X Eccentricity
+- But the performance decrement in the cued trials was more pronounced for shorter ISIs (i.e., when a higher temporal resolution is required) than for longer ISIs and for more central, compared with more peripheral, eccentricities.
+  For reaction time:
+-Effects on RTs were not statistically significant.
 
+The 1st replication porject found:
+- No significant main effect of cuing: F(1,9)=2.061 p=.0185
+- Significant interaction effect of Cuing X ISI: F(2,18)=10.86 p<.001
+- Reaction time data was not analyzed
+
+The rescue project (2nd replication) found:
+  For accuracy:
+-Effects on accuracy were not statistically significant.
+  For reaction time:
+- The was a significant interaction effect of Cueing X Eccentricity: F(5, 20) = 3.07, p = 0.032
 
 ```{r}
 ### Plotting
@@ -265,7 +274,6 @@ p1 <- ggplot(dplot_cue, aes(x=cue, y=dPrime))+
   ggtitle("Cueing Condition") +
   theme_classic()
 
-#or a bar plot?
 #p1 <- ggplot(dplot_cue, aes(x=cue, y=dPrime))+
  # geom_bar(stat = "identity") +
  # scale_y_continuous(breaks = seq(0,3.75,0.5),limits = c(0,3.75))+
@@ -299,27 +307,129 @@ p4 <- ggplot(dplot_ecc2, aes(x=targetLoc, y=`dPrime`, group=ISI)) +
   theme_classic()
 
 plot_grid(p1, p2, p3, p4,ncol = 2, nrow = 2)
+
 ```
 
+![1st replication](1st_rep_fig.png) 
 
-*Three-panel graph with original, 1st replication, and your replication is ideal here*
+![Fig2 adpated from the original paper](original_fig.png)
 
 ### Exploratory analyses
+A post-hoc test was conducted to observe the significant interaction effect of Cue x Eccentricity. 
+```{r}
+library(emmeans)
+# Obtain estimated marginal means (lsmeans)
+lsmeans <- emmeans(Result_rt, ~ cue * targetLoc);
 
-Any follow-up analyses desired (not required).  
+# Pairwise comparisons
+pwc <- pairs(lsmeans, adjust = "sidak");
 
-## Discussion
+#Find the significanr comprarison:
+# install.packages("broom")
+library(broom)
+pwc_df <- tidy(pwc)
+# Filter rows with adj.p.value < 0.05
+significant_comparisons <- subset(pwc_df, adj.p.value < 0.05)
+# Display the significant comparisons
+print(significant_comparisons)
+
+```
+
+There is a statistically significant difference between the neutral and cued groups for targetLoc6 (that is, the distance of the target from the center is 6°), and the positive estimate suggests that the mean for neutral is higher than the mean for cued.
+
+A grouped bar plot to visualize the interaction effect:
+
+```{r}
+# Convert 'cue' and 'targetLoc' to factors for correct plotting
+d$cue <- as.factor(d$cue)
+d$targetLoc <- as.factor(d$targetLoc)
+# Calculate summary statistics
+summary_data <- d %>%
+  group_by(cue, targetLoc) %>%
+  summarise(mean = mean(RT), sd = sd(RT))
+
+# Create a grouped bar plot with error bars
+grouped_bar_plot <- ggplot(summary_data, aes(x = targetLoc, y = mean, fill = cue)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.7) +
+  geom_errorbar(
+    aes(ymin = mean - sd, ymax = mean + sd, group = cue),
+    position = position_dodge(width = 0.8), width = 0.25,
+    size = 0.7
+  ) +
+  labs(title = "Grouped Bar Plot",
+       x = "targetLoc",
+       y = "Reaction Time (RT)",
+       fill = "Cue") +
+  theme_minimal()
+
+# Display the plot
+print(grouped_bar_plot)
+
+```
+
+## Discussion and Summary of the Replication Attempt
+  Yeshurun & Levy (2003) found significant main effect of cueing on accuracy. The authors' interpretation of the results is as follows: Directing attention to the target location negatively impacted observers' ability to discern the temporal gap. This decline in performance might be attributed to the side effect of spatial attention improving the spatial resolution: The authors propose that the enhancement of spatial resolution by spatial attention might lead to a trade-off with temporal resolution, ultimately resulting in a detrimental impact on the latter. There were no significant effects on reaction time (RT)
+  The first replication attempt, on the other hand, found no significant main effect of cueing on accuracy but a significant interaction of cueing and inter stimulus interval (ISI). The results showed that in longer ISI conditions, spatial attention enhanced performance in the temporal resolution task, while in shorter ISI, spatial attention degraded the performance. Specifically, the post-hoc test of paired t test revealed that spatial attention enhanced the task performance in ISI of 11 ms, while spatial attention degraded the task performance in ISI of 35 ms. The effects on RT was not tested on the first replication attempt.   
+  The second replication attempt found no significant main effect of cueing on accuracy as well. Furthermore, there was no significant interaction effects on accuracy. There were no significant main effects on RT but a significant interaction effect of cueing and eccentricity. A post-hoc analysis revealed that there is a significant difference between neutral and cued groups for targetLoc6; that is, when the distance of the target from the center is 6°), mean RT being higher for neutral compared to cued trials.
+  Overall, non of the results replicate across the original study and two replication attempts. This is might be due to different samples sizes employed in these three studies: While the original study had 18 participants, the first replication attempt had 10, and the second one had 5. It should be also noted that the original study was replicated by Chica & Christie (2009) with 12 participants. Therefore, to make a meaningful interpretations about the replicability of the original experiment, a replication attempt with more participants is needed.
 
 ## Mini meta analysis
+The effect size was not reported on the original study. Therefore, I calculated the the aggregate effect size using the effect sizes of the first and second replications for the key analysis (3 way ANOVA on accuracy- main effect of cueing).
+```{r}
+#Calculate effect size for first replication
+# Given values from ANOVA output
+ss_cue <- 1.534
+ss_residuals <- 10.557
 
-Combining across the original paper, 1st replication, and 2nd replication, what is the aggregate effect size? 
+# Calculate partial eta-squared
+eta_squared <- ss_cue / (ss_cue + ss_residuals)
+eta_squared<-round(eta_squared, 2)
+# Print the result with two decimal places
+cat("Partial Eta-squared for cue:",eta_squared, "\n")
 
-### Summary of Replication Attempt
+#Calculate effect size for second replication
 
-Open the discussion section with a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.  
+## Given values from ANOVA output
+ss_cue_2 <- 0.030803
+ss_residuals_2 <- 1.747621
+## Calculate partial eta-squared
+eta_squared_2 <- ss_cue_2 / (ss_cue_2 + ss_residuals_2)
+eta_squared_2 <-round(eta_squared_2, 2)
+## Print the result with two decimal places
+cat("Partial Eta-squared for cue:",eta_squared_2, "\n")
 
+# Calculate aggregate effect size (average)
+aggregate_effect_size <- (eta_squared+ eta_squared_2) / 2
+# Print the result with two decimal places
+cat("Aggregate Effect Size for cue across two experiments:", round(aggregate_effect_size, 2), "\n")
+
+
+#Alternatively:
+install.packages("metafor")
+library(metafor)
+
+# Given effect sizes and standard errors from two experiments
+es_1 <- eta_squared
+se_1 <- sqrt(ss_cue / (ss_cue + ss_residuals))
+
+es_2 <- eta_squared_2
+se_2 <- sqrt(ss_cue_2 / (ss_cue_2 + ss_residuals_2))
+
+# Create a data frame with effect sizes and standard errors
+forest_data <- data.frame(
+  study = c("Experiment 1", "Experiment 2"),
+  es = c(es_1, es_2),
+  se = c(se_1, se_2)
+)
+
+# Create a meta-analysis model
+meta_model <- rma(es, sei = se, data = forest_data)
+
+# Print the summary of the meta-analysis
+print(meta_model)
+
+# plot
+forest(meta_model, showweights = TRUE, slab = forest_data$study)
+```
 ### Commentary
-
-Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long. 
-
-
+Non of the results are replicated across three experiments (the original study, the first replication attempt, and the second replication attempt). This might be resulting from the low sample sizes of the replication studies. I want to note that I was not able to find 18 naive participants as I planned to, and rather recruited data from 5 non-naive students. I am planning to recruit data from 18 PSYCH1 students on 2024 Winter Quarter. 
