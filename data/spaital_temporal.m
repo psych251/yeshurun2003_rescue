@@ -7,7 +7,6 @@ KbName('UnifyKeyNames'); % keyboard
 Experimenter = -3;
 Participant = -3;
 Scanner = -3;
-
 %% Subject information
 subName = input('Subject Initials:  ', 's');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -19,7 +18,7 @@ cd(functions)
 %addpath(genpath(fullfile(genDir,'_FUNC')));
 dataDir = fullfile(genDir,'_DATA','behavior',subName);
 if ~exist(dataDir) &&  ~strcmp(subName,'tes'), mkdir(dataDir); end
-datas = getAllFiles(dataDir,'*.mat',1); %function didn't work
+datas = getAllFiles(dataDir,'*.mat',1); 
 runN=length(datas)+1;
 dataName = fullfile(dataDir,sprintf('exp1_%s_%d',subName,length(datas)+1)); 
 %% screen setting
