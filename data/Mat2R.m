@@ -2,7 +2,7 @@ clear
 
 genDir=pwd;
 addpath(genpath(fullfile(genDir,'_FUNC')));
-dataDir = fullfile(genDir,'_DATA','behavior','pilot_B');
+dataDir = fullfile(genDir,'_DATA','behavior','Experiment');
 alldata = getAllFiles(dataDir,'*.mat',1);
 
 subID = strsplit(fileparts(alldata{1}),'/');
@@ -75,7 +75,7 @@ sptioTemporal.sub = catSub;
 sptioTemporal.SDT = SDT';
 
 % Write the table to a CSV file
-writetable(sptioTemporal, '../writeup/sptioTemporal.csv', 'Delimiter', ',');
+writetable(sptioTemporal, '../writeup/Experiment.csv', 'Delimiter', ',');
 
 %export(sptioTemporal,'File','../writeup/sptioTemporal.csv','Delimiter',',');
 

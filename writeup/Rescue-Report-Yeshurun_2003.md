@@ -1,11 +1,10 @@
 ---
 title: "Replication of Study 1 by Yeshurun & Levy (2003). Transient spatial attention degrades temporal resolution. Psychological Science"
 author: "Irmak Ergin (irmak.ergin@stanford.edu)"
-date: "`r format(Sys.time(), '%B %d, %Y')`"
-format:
-  html:
-    toc: true
-    toc_depth: 3
+date: "March 05, 2024"
+output: 
+  html_document:
+    keep_md: true
     
 ---
 
@@ -121,22 +120,84 @@ Data preparation plan:
 The data preparation code below has taken from the first replication report with changes.
 	
 
-```{r}
+
+```r
 ####Load Relevant Libraries and Functions
 
 library(tidyverse)
+```
+
+```
+## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.3     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+## ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.2     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+```
+
+```r
 library(ggplot2)
 library(ggthemes)
 library(psycho)
 library(ggpubr)
 library(gridExtra)
+```
+
+```
+## 
+## Attaching package: 'gridExtra'
+## 
+## The following object is masked from 'package:dplyr':
+## 
+##     combine
+```
+
+```r
 library(cowplot)
+```
+
+```
+## 
+## Attaching package: 'cowplot'
+## 
+## The following object is masked from 'package:ggpubr':
+## 
+##     get_legend
+## 
+## The following object is masked from 'package:ggthemes':
+## 
+##     theme_map
+## 
+## The following object is masked from 'package:lubridate':
+## 
+##     stamp
+```
+
+```r
 library(emmeans)
 
 ####Import data
 
 d <- read_csv("Experiment.csv")
+```
 
+```
+## Rows: 3888 Columns: 9
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## chr (2): sub, SDT
+## dbl (7): cue, numFlash, targetLoc, ISI, response, RT, accuracy
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+```r
 #### Prepare data for analysis - create columns and change variable names
 #Create a new column 'cue' in the dataset d. If the value in the 'cue' column is 1, it assigns 'cued', otherwise 'neutral' to the new 'cue' column.
 
@@ -151,10 +212,33 @@ for(i in 1:length(subNames)) {
   d$sub[d$sub == subNames[i]] = new_subNames[i]
 }
 end
+```
+
+```
+## function (x, ...) 
+## UseMethod("end")
+## <bytecode: 0x11ac80090>
+## <environment: namespace:stats>
+```
+
+```r
 head(d)
 ```
 
-```{r}
+```
+## # A tibble: 6 × 9
+##   cue     numFlash targetLoc   ISI response      RT accuracy sub   SDT  
+##   <chr>      <dbl>     <dbl> <dbl>    <dbl>   <dbl>    <dbl> <chr> <chr>
+## 1 cued           1         5    35        2 0.00205        0 s001  FA   
+## 2 neutral        2         3    35        2 0.00409        1 s001  HI   
+## 3 neutral        2         4    35        2 0.00173        1 s001  HI   
+## 4 neutral        2         5    23        1 0.00147        0 s001  MI   
+## 5 cued           1         2    11        1 0.00246        1 s001  CR   
+## 6 neutral        2         2    11        2 0.00190        1 s001  HI
+```
+
+
+```r
 # TargetLoc is the column with eccentricity information that are arbitraryly labeled from 1 to 6 in the stimulus creation code. The code below assigns back eccentricity values to 'targetLoc' labels. 
 
 kk = sort(unique(d$targetLoc))
@@ -178,33 +262,104 @@ d <- d %>% mutate(
 )
 ```
 
-```{r}
+
+```r
 # Compute dPrime
 
 dp <- d %>% group_by(sub,cue,targetLoc,ISI) %>% summarize(nHit = sum(SDT == 'HI' ), nFA = sum(SDT == 'FA' ), nMiss = sum(SDT == 'MI' ), nCR = sum(SDT == 'CR' ), dPrime= dprime(nHit, nFA, nMiss, nCR)$dprime, criterion=dprime(nHit, nFA, nMiss, nCR)$c) 
+```
 
+```
+## `summarise()` has grouped output by 'sub', 'cue', 'targetLoc'. You can override
+## using the `.groups` argument.
+```
+
+```r
 # Make sub-selection of the data for plotting later on -accuracy
 
 dplot_cue <- dp %>% group_by(sub,cue) %>% summarize(dPrime = mean(dPrime))
+```
+
+```
+## `summarise()` has grouped output by 'sub'. You can override using the `.groups`
+## argument.
+```
+
+```r
 dplot_ecc <- dp %>% group_by(cue,targetLoc) %>% summarize(dPrime = mean(dPrime))
+```
+
+```
+## `summarise()` has grouped output by 'cue'. You can override using the `.groups`
+## argument.
+```
+
+```r
 dplot_ecc2 <- dp %>% group_by(targetLoc,ISI) %>% summarize(dPrime = mean(dPrime))
+```
+
+```
+## `summarise()` has grouped output by 'targetLoc'. You can override using the
+## `.groups` argument.
+```
+
+```r
 dplot_ISI <- dp %>% group_by(cue,ISI) %>% summarize(dPrime = mean(dPrime))
+```
+
+```
+## `summarise()` has grouped output by 'cue'. You can override using the `.groups`
+## argument.
+```
+
+```r
 dplot_stat_ISI <- dp %>% group_by(sub,cue,ISI) %>% summarize(dPrime = mean(dPrime))
+```
 
+```
+## `summarise()` has grouped output by 'sub', 'cue'. You can override using the
+## `.groups` argument.
+```
 
+```r
 dplot_ecc_sd <- dp %>% group_by(sub,targetLoc,ISI) %>% summarize(dPrime = mean(dPrime))
+```
 
+```
+## `summarise()` has grouped output by 'sub', 'targetLoc'. You can override using
+## the `.groups` argument.
+```
+
+```r
 dplot_ecc_sd
 ```
 
-```{r}
+```
+## # A tibble: 324 × 4
+## # Groups:   sub, targetLoc [108]
+##    sub   targetLoc ISI   dPrime
+##    <chr> <fct>     <fct>  <dbl>
+##  1 s001  0         11    0.416 
+##  2 s001  0         23    0     
+##  3 s001  0         35    2.30  
+##  4 s001  3         11    0.416 
+##  5 s001  3         23    0.734 
+##  6 s001  3         35    1.88  
+##  7 s001  6         11    0.0972
+##  8 s001  6         23    1.05  
+##  9 s001  6         35    1.57  
+## 10 s001  9         11    0.319 
+## # ℹ 314 more rows
+```
+
+
+```r
 # Make sub-selection of the data for RT
 dplot_cue <- dp %>% group_by(sub, cue) %>% summarize(dPrime = mean(dPrime), .groups = 'keep')
 dplot_ecc <- dp %>% group_by(cue, targetLoc) %>% summarize(dPrime = mean(dPrime), .groups = 'keep')
 dplot_ecc2 <- dp %>% group_by(targetLoc, ISI) %>% summarize(dPrime = mean(dPrime), .groups = 'keep')
 dplot_ISI <- dp %>% group_by(cue, ISI) %>% summarize(dPrime = mean(dPrime), .groups = 'keep')
 dplot_stat_ISI <- dp %>% group_by(sub, cue, ISI) %>% summarize(dPrime = mean(dPrime), .groups = 'keep')
-
 ```
 
 ## Results of control measures
@@ -217,23 +372,97 @@ Following the original paper, and as it was done in the 1st replication attempt,
 
 The key statistic of 3 way ANOVA anova was performed. The code below is taken by the first replication report.
 
-```{r}
+
+```r
 #Accuracy
 
 # within-subject 3-way Anova on Accuracy (dPrime), testing the interaction of cue,eccentricity,and ISI
 Result_accuracy <- aov(dPrime ~ (cue*targetLoc*ISI) + Error(sub/cue*targetLoc*ISI), data=dp)
 
 summary(Result_accuracy)
-
-# main effect: Cuing
-summary(Result_accuracy[5])
-
-# interaction effect: Cuing X ISI
-summary(Result_accuracy[10])
-
 ```
 
-```{r}
+```
+## 
+## Error: sub
+##           Df Sum Sq Mean Sq F value Pr(>F)
+## Residuals 17  59.79   3.517               
+## 
+## Error: targetLoc
+##           Df Sum Sq Mean Sq
+## targetLoc  5  15.48   3.097
+## 
+## Error: ISI
+##     Df Sum Sq Mean Sq
+## ISI  2  168.2    84.1
+## 
+## Error: sub:cue
+##           Df Sum Sq Mean Sq F value Pr(>F)
+## cue        1  0.586  0.5859   0.721  0.408
+## Residuals 17 13.823  0.8131               
+## 
+## Error: sub:targetLoc
+##           Df Sum Sq Mean Sq F value Pr(>F)
+## Residuals 85  48.82  0.5744               
+## 
+## Error: sub:ISI
+##           Df Sum Sq Mean Sq F value Pr(>F)
+## Residuals 34  51.77   1.523               
+## 
+## Error: targetLoc:ISI
+##               Df Sum Sq Mean Sq
+## targetLoc:ISI 10  10.91   1.091
+## 
+## Error: sub:cue:targetLoc
+##               Df Sum Sq Mean Sq F value Pr(>F)  
+## cue:targetLoc  5  5.601  1.1202   3.098 0.0129 *
+## Residuals     85 30.736  0.3616                 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Error: sub:cue:ISI
+##           Df Sum Sq Mean Sq F value Pr(>F)
+## cue:ISI    2  2.004  1.0020   1.186  0.318
+## Residuals 34 28.716  0.8446               
+## 
+## Error: sub:targetLoc:ISI
+##            Df Sum Sq Mean Sq F value Pr(>F)
+## Residuals 170  65.94  0.3879               
+## 
+## Error: sub:cue:targetLoc:ISI
+##                    Df Sum Sq Mean Sq F value Pr(>F)
+## cue:targetLoc:ISI  10   3.77  0.3773   0.911  0.525
+## Residuals         170  70.42  0.4142
+```
+
+```r
+# main effect: Cuing
+summary(Result_accuracy[5])
+```
+
+```
+## 
+## Error: sub:cue
+##           Df Sum Sq Mean Sq F value Pr(>F)
+## cue        1  0.586  0.5859   0.721  0.408
+## Residuals 17 13.823  0.8131
+```
+
+```r
+# interaction effect: Cuing X ISI
+summary(Result_accuracy[10])
+```
+
+```
+## 
+## Error: sub:cue:ISI
+##           Df Sum Sq Mean Sq F value Pr(>F)
+## cue:ISI    2  2.004  1.0020   1.186  0.318
+## Residuals 34 28.716  0.8446
+```
+
+
+```r
 # RT
 
 # Within-subject 3-way ANOVA - Reaction Time
@@ -241,12 +470,99 @@ Result_rt <- aov(RT ~ (cue * targetLoc * ISI) + Error(sub / cue * targetLoc * IS
 
 # Summary of RT ANOVA
 summary(Result_rt)
+```
 
+```
+## 
+## Error: sub
+##           Df    Sum Sq   Mean Sq F value Pr(>F)
+## Residuals 17 1.248e-05 7.342e-07               
+## 
+## Error: targetLoc
+##           Df    Sum Sq   Mean Sq
+## targetLoc  5 1.784e-06 3.568e-07
+## 
+## Error: ISI
+##     Df    Sum Sq  Mean Sq
+## ISI  2 8.519e-07 4.26e-07
+## 
+## Error: sub:cue
+##           Df    Sum Sq   Mean Sq F value Pr(>F)  
+## cue        1 5.446e-07 5.446e-07   7.713 0.0129 *
+## Residuals 17 1.200e-06 7.060e-08                 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Error: sub:targetLoc
+##           Df    Sum Sq   Mean Sq F value Pr(>F)
+## Residuals 85 5.621e-06 6.613e-08               
+## 
+## Error: sub:ISI
+##           Df    Sum Sq   Mean Sq F value Pr(>F)
+## Residuals 34 3.483e-06 1.024e-07               
+## 
+## Error: targetLoc:ISI
+##               Df    Sum Sq   Mean Sq
+## targetLoc:ISI 10 2.368e-06 2.368e-07
+## 
+## Error: sub:cue:targetLoc
+##               Df    Sum Sq   Mean Sq F value   Pr(>F)    
+## cue:targetLoc  5 2.631e-06 5.262e-07   6.567 3.27e-05 ***
+## Residuals     85 6.811e-06 8.010e-08                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Error: sub:cue:ISI
+##           Df    Sum Sq   Mean Sq F value  Pr(>F)   
+## cue:ISI    2 8.558e-07 4.279e-07   6.251 0.00488 **
+## Residuals 34 2.327e-06 6.850e-08                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Error: sub:targetLoc:ISI
+##            Df    Sum Sq   Mean Sq F value Pr(>F)
+## Residuals 170 1.367e-05 8.041e-08               
+## 
+## Error: sub:cue:targetLoc:ISI
+##                    Df    Sum Sq   Mean Sq F value   Pr(>F)    
+## cue:targetLoc:ISI  10 3.209e-06 3.209e-07   3.942 7.57e-05 ***
+## Residuals         170 1.384e-05 8.140e-08                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Error: Within
+##             Df  Sum Sq   Mean Sq F value Pr(>F)
+## Residuals 3240 0.00031 9.569e-08
+```
+
+```r
 # Main effect: Cuing
 summary(Result_rt[5])
+```
 
+```
+## 
+## Error: sub:cue
+##           Df    Sum Sq   Mean Sq F value Pr(>F)  
+## cue        1 5.446e-07 5.446e-07   7.713 0.0129 *
+## Residuals 17 1.200e-06 7.060e-08                 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
 # Interaction effect: Cuing X ISI
 summary(Result_rt[10])
+```
+
+```
+## 
+## Error: sub:cue:ISI
+##           Df    Sum Sq   Mean Sq F value  Pr(>F)   
+## cue:ISI    2 8.558e-07 4.279e-07   6.251 0.00488 **
+## Residuals 34 2.327e-06 6.850e-08                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 The original paper found:
@@ -280,7 +596,8 @@ The rescue project (second replication) found:
 - A significant three-way interaction was found, F(10, 170) = 3.942, p < .001, indicating that the combined effects of cueing, target location, and ISI on reaction time were significant.
 
 
-```{r warning=FALSE}
+
+```r
 # Plotting
 
 # Cueing effect
@@ -324,8 +641,9 @@ p4 <- ggplot(dplot_ecc2, aes(x=targetLoc, y=`dPrime`, group=ISI)) +
   theme_classic()
 
 plot_grid(p1, p2, p3, p4,ncol = 2, nrow = 2)
-
 ```
+
+![](Rescue-Report-Yeshurun_2003_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 Figure 2. Results of the second replication
 
@@ -345,7 +663,8 @@ The second replication attempt found no significant main effect of cueing on acc
 
 The effect size was not reported on the original study. Therefore, I calculated the aggregate effect size using the effect sizes of the first and second replications for the key analysis (3 way ANOVA on accuracy- main effect of cueing).
 
-```{r}
+
+```r
 #Calculate effect size for first replication
 # Given values from ANOVA output
 ss_cue <- 1.534
@@ -356,7 +675,13 @@ eta_squared <- ss_cue / (ss_cue + ss_residuals)
 eta_squared<-round(eta_squared, 2)
 # Print the result with two decimal places
 cat("Partial Eta-squared for cue:",eta_squared, "\n")
+```
 
+```
+## Partial Eta-squared for cue: 0.13
+```
+
+```r
 #Calculate effect size for second replication
 
 ## Given values from ANOVA output
@@ -367,18 +692,74 @@ eta_squared_2 <- ss_cue_2 / (ss_cue_2 + ss_residuals_2)
 eta_squared_2 <-round(eta_squared_2, 2)
 ## Print the result with two decimal places
 cat("Partial Eta-squared for cue:",eta_squared_2, "\n")
+```
 
+```
+## Partial Eta-squared for cue: 0.04
+```
+
+```r
 # Calculate aggregate effect size (average)
 aggregate_effect_size <- (eta_squared+ eta_squared_2) / 2
 # Print the result with two decimal places
 cat("Aggregate Effect Size for cue across two experiments:", round(aggregate_effect_size, 2), "\n")
+```
 
+```
+## Aggregate Effect Size for cue across two experiments: 0.09
+```
 
+```r
 #Alternatively:
 options(repos = c(CRAN = "https://cran.rstudio.com/"))
 install.packages("metafor")
-library(metafor)
+```
 
+```
+## Installing package into '/Users/irmakergin/Library/R/arm64/4.3/library'
+## (as 'lib' is unspecified)
+```
+
+```
+## 
+## The downloaded binary packages are in
+## 	/var/folders/s4/sw1k3wb56xl075rfw_q_80300000gr/T//RtmpyMZeoT/downloaded_packages
+```
+
+```r
+library(metafor)
+```
+
+```
+## Loading required package: Matrix
+```
+
+```
+## 
+## Attaching package: 'Matrix'
+```
+
+```
+## The following objects are masked from 'package:tidyr':
+## 
+##     expand, pack, unpack
+```
+
+```
+## Loading required package: metadat
+```
+
+```
+## Loading required package: numDeriv
+```
+
+```
+## 
+## Loading the 'metafor' package (version 4.4-0). For an
+## introduction to the package please type: help(metafor)
+```
+
+```r
 # Given effect sizes and standard errors from two experiments
 es_1 <- eta_squared
 se_1 <- sqrt(ss_cue / (ss_cue + ss_residuals))
@@ -398,10 +779,35 @@ meta_model <- rma(es, sei = se, data = forest_data)
 
 # Print the summary of the meta-analysis
 print(meta_model)
+```
 
+```
+## 
+## Random-Effects Model (k = 2; tau^2 estimator: REML)
+## 
+## tau^2 (estimated amount of total heterogeneity): 0 (SE = 0.1185)
+## tau (square root of estimated tau^2 value):      0
+## I^2 (total heterogeneity / total variability):   0.00%
+## H^2 (total variability / sampling variability):  1.00
+## 
+## Test for Heterogeneity:
+## Q(df = 1) = 0.0483, p-val = 0.8260
+## 
+## Model Results:
+## 
+## estimate      se    zval    pval    ci.lb   ci.ub    
+##   0.0618  0.1755  0.3524  0.7245  -0.2821  0.4058    
+## 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
 # plot
 forest(meta_model, showweights = TRUE, slab = forest_data$study)
 ```
+
+![](Rescue-Report-Yeshurun_2003_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 # Scale Ratings
 
 *Using a 0-1 scale rating [0, .25, .5, .75, 1], how well did this rescue replicate the original results?*
