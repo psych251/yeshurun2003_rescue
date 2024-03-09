@@ -2,11 +2,10 @@
 title: "Replication of Study 1 by Yeshurun & Levy (2003). Transient spatial attention degrades temporal resolution. Psychological Science"
 author: "Irmak Ergin (irmak.ergin@stanford.edu)"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
-format:
-  html:
+output:
+  html_document:
     toc: true
-    toc_depth: 3
-    
+    theme: united
 ---
 
 # Introduction
@@ -17,6 +16,7 @@ Required Stimuli & Procedures:"Two flashes of light were presented successively 
 
 Link to Repo: https://github.com/psych251/yeshurun2003_rescue/tree/main 
 Link to RPubs: https://rpubs.com/irmak_ergin
+Link to pre-registration: https://osf.io/8wz7g/ 
 Link to Original Paper: https://github.com/psych251/yeshurun2003_rescue/blob/main/original_paper/Yeshurun%20%26%20Levy(2003).pdf
 Link to First Replication Attempt: https://github.com/psych251/Yeshurun2003
 
@@ -109,7 +109,8 @@ There were no differences from planned.
 
 ## Data preparation
 
-Link to data organization code (to be able to take transfer the data from MATLAB to R): https://github.com/psych251/yeshurun2003_rescue/blob/main/data/Mat2R.m 
+Link to data organization code: https://github.com/psych251/yeshurun2003_rescue/blob/main/data/Mat2R.m 
+This code is used to make the data ready for analysis (MATLAB to R) and make the participant ids anonymous.
 
 Data preparation plan: 
 - Load the data
@@ -339,7 +340,7 @@ Yeshurun & Levy (2003) found significant main effect of cueing on accuracy. The 
 
 The first replication attempt, on the other hand, found no significant main effect of cueing on accuracy but a significant interaction of cueing and inter stimulus interval (ISI). The results showed that in longer ISI conditions, spatial attention enhanced performance in the temporal resolution task, while in shorter ISI, spatial attention degraded the performance. Specifically, the post-hoc test of paired t test revealed that spatial attention enhanced the task performance in ISI of 11 ms, while spatial attention degraded the task performance in ISI of 35 ms. The effects on RT was not tested on the first replication attempt.   
 
-The second replication attempt found no significant main effect of cueing on accuracy as well but there was a significant main  effect of accuracy on reaction time. Interection effects are reported in the 'Results' section. Overall, non of the results replicate across the original study and two replication attempts. This is might be due to different samples sizes employed in these three studies: While the original study and the second replication had 18 participants, the first replication attempt had 10 participants. It should be also noted that the original study was replicated by Chica & Christie (2009) with 12 participants.
+The second replication attempt found no significant main effect of cueing on accuracy but there was a significant main  effect of cueing on reaction time. Interection effects are reported in the 'Results' section. Overall, non of the results replicate across the original study and two replication attempts. This is might be due to different samples sizes employed in these three studies: While the original study and the second replication had 18 participants, the first replication attempt had 10 participants. It should be also noted that the original study was replicated by Chica & Christie (2009) with 12 participants.
 
 # Mini meta analysis
 
